@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,17 +21,20 @@ import java.util.TimerTask;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     Button Bt;
-    TextView Tv;
+
     Timer myTimer = null;
     TimerTask myTask = null;
     int count = 0;
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Bt = (Button) findViewById(R.id.incbt);
-        Tv = (TextView) findViewById(R.id.tv);
+
+        pb = (ProgressBar) findViewById(R.id.pb);
+
         Bt.setOnClickListener(this);
         myTask = new TimerTask() {
             @Override
@@ -65,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if(v == Bt){
             count += 10;
-            Tv.setText(String.valueOf(count));
+            pb.setProgress(count);
         }
     }
 
@@ -85,7 +89,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         {
             Bundle b = Mess.getData ();
             int tbp = b.getInt ("Value");
-            Tv.setText (String.valueOf (tbp));
+            pb.setProgress(tbp);
         }
     };
 
